@@ -23,6 +23,13 @@ class PrediksiController extends Controller
     #[Attributes\Get('', 'index')]
     public function index(): View
     {
+
+        $input = 'Laravel ke Python';
+        $command = escapeshellcmd(env('PYTHON_INTERPRETER')." " . app_path('Core/PythonScripts/predict.py') . " \"$input\"");
+        $output = shell_exec($command);
+
+        $this->setData('output', $output);
+
         return $this->view('pages.admin.prediksi.index');
     }
 }
