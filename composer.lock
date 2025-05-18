@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "626b9e7ddd47fb7eff9aaa53cce0c9ad",
+    "content-hash": "7218bb8975fce3f55ce8344a62d13b12",
     "packages": [
         {
             "name": "brick/math",
@@ -134,6 +134,71 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
+        },
+        {
+            "name": "dentro/yalr",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digital-entropy/yalr.git",
+                "reference": "e2197a1ac329395545c8c6961b8f756f410bc523"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digital-entropy/yalr/zipball/e2197a1ac329395545c8c6961b8f756f410bc523",
+                "reference": "e2197a1ac329395545c8c6961b8f756f410bc523",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/filesystem": "^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/routing": "^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0",
+                "php": ">=8.3"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^10.2",
+                "phpunit/phpunit": "^12.0",
+                "rector/rector": "*",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dentro\\Yalr\\YalrServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dentro\\Yalr\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rifki Alhuraibi",
+                    "email": "veelasky@gmail.com"
+                },
+                {
+                    "name": "Muhajirin Ilyas",
+                    "email": "muhajirinlpu@gmail.com"
+                }
+            ],
+            "description": "Class base routing for laravel application.",
+            "support": {
+                "issues": "https://github.com/digital-entropy/yalr/issues",
+                "source": "https://github.com/digital-entropy/yalr/tree/v1.5.0"
+            },
+            "time": "2025-05-07T08:31:27+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -2111,41 +2176,42 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "3.9.1",
+            "version": "2.73.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CarbonPHP/carbon.git",
-                "reference": "ced71f79398ece168e24f7f7710462f462310d4d"
+                "reference": "9228ce90e1035ff2f0db84b40ec2e023ed802075"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/ced71f79398ece168e24f7f7710462f462310d4d",
-                "reference": "ced71f79398ece168e24f7f7710462f462310d4d",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/9228ce90e1035ff2f0db84b40ec2e023ed802075",
+                "reference": "9228ce90e1035ff2f0db84b40ec2e023ed802075",
                 "shasum": ""
             },
             "require": {
-                "carbonphp/carbon-doctrine-types": "<100.0",
+                "carbonphp/carbon-doctrine-types": "*",
                 "ext-json": "*",
-                "php": "^8.1",
+                "php": "^7.1.8 || ^8.0",
                 "psr/clock": "^1.0",
-                "symfony/clock": "^6.3 || ^7.0",
                 "symfony/polyfill-mbstring": "^1.0",
-                "symfony/translation": "^4.4.18 || ^5.2.1|| ^6.0 || ^7.0"
+                "symfony/polyfill-php80": "^1.16",
+                "symfony/translation": "^3.4 || ^4.0 || ^5.0 || ^6.0"
             },
             "provide": {
                 "psr/clock-implementation": "1.0"
             },
             "require-dev": {
-                "doctrine/dbal": "^3.6.3 || ^4.0",
-                "doctrine/orm": "^2.15.2 || ^3.0",
-                "friendsofphp/php-cs-fixer": "^3.57.2",
-                "kylekatarnls/multi-tester": "^2.5.3",
-                "ondrejmirtes/better-reflection": "^6.25.0.4",
-                "phpmd/phpmd": "^2.15.0",
-                "phpstan/extension-installer": "^1.3.1",
-                "phpstan/phpstan": "^1.11.2",
-                "phpunit/phpunit": "^10.5.20",
-                "squizlabs/php_codesniffer": "^3.9.0"
+                "doctrine/dbal": "^2.0 || ^3.1.4 || ^4.0",
+                "doctrine/orm": "^2.7 || ^3.0",
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "kylekatarnls/multi-tester": "^2.0",
+                "ondrejmirtes/better-reflection": "<6",
+                "phpmd/phpmd": "^2.9",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12.99 || ^1.7.14",
+                "phpunit/php-file-iterator": "^2.0.5 || ^3.0.6",
+                "phpunit/phpunit": "^7.5.20 || ^8.5.26 || ^9.5.20",
+                "squizlabs/php_codesniffer": "^3.4"
             },
             "bin": [
                 "bin/carbon"
@@ -2196,8 +2262,8 @@
             ],
             "support": {
                 "docs": "https://carbon.nesbot.com/docs",
-                "issues": "https://github.com/CarbonPHP/carbon/issues",
-                "source": "https://github.com/CarbonPHP/carbon"
+                "issues": "https://github.com/briannesbitt/Carbon/issues",
+                "source": "https://github.com/briannesbitt/Carbon"
             },
             "funding": [
                 {
@@ -2213,7 +2279,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-01T19:51:51+00:00"
+            "time": "2025-01-08T20:10:23+00:00"
         },
         {
             "name": "nette/schema",
@@ -3285,80 +3351,6 @@
                 }
             ],
             "time": "2024-04-27T21:32:50+00:00"
-        },
-        {
-            "name": "symfony/clock",
-            "version": "v7.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/clock.git",
-                "reference": "b81435fbd6648ea425d1ee96a2d8e68f4ceacd24"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/clock/zipball/b81435fbd6648ea425d1ee96a2d8e68f4ceacd24",
-                "reference": "b81435fbd6648ea425d1ee96a2d8e68f4ceacd24",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "psr/clock": "^1.0",
-                "symfony/polyfill-php83": "^1.28"
-            },
-            "provide": {
-                "psr/clock-implementation": "1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "Resources/now.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Component\\Clock\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Decouples applications from the system clock",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "clock",
-                "psr20",
-                "time"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/clock/tree/v7.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-09-25T14:21:43+00:00"
         },
         {
             "name": "symfony/console",
@@ -5187,33 +5179,33 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v7.2.6",
+            "version": "v6.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "e7fd8e2a4239b79a0fd9fb1fef3e0e7f969c6dc6"
+                "reference": "bb92ea5588396b319ba43283a5a3087a034cb29c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/e7fd8e2a4239b79a0fd9fb1fef3e0e7f969c6dc6",
-                "reference": "e7fd8e2a4239b79a0fd9fb1fef3e0e7f969c6dc6",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/bb92ea5588396b319ba43283a5a3087a034cb29c",
+                "reference": "bb92ea5588396b319ba43283a5a3087a034cb29c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2",
+                "php": ">=8.1",
                 "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/translation-contracts": "^2.5|^3.0"
             },
             "conflict": {
-                "symfony/config": "<6.4",
-                "symfony/console": "<6.4",
-                "symfony/dependency-injection": "<6.4",
+                "symfony/config": "<5.4",
+                "symfony/console": "<5.4",
+                "symfony/dependency-injection": "<5.4",
                 "symfony/http-client-contracts": "<2.5",
-                "symfony/http-kernel": "<6.4",
+                "symfony/http-kernel": "<5.4",
                 "symfony/service-contracts": "<2.5",
-                "symfony/twig-bundle": "<6.4",
-                "symfony/yaml": "<6.4"
+                "symfony/twig-bundle": "<5.4",
+                "symfony/yaml": "<5.4"
             },
             "provide": {
                 "symfony/translation-implementation": "2.3|3.0"
@@ -5221,17 +5213,17 @@
             "require-dev": {
                 "nikic/php-parser": "^4.18|^5.0",
                 "psr/log": "^1|^2|^3",
-                "symfony/config": "^6.4|^7.0",
-                "symfony/console": "^6.4|^7.0",
-                "symfony/dependency-injection": "^6.4|^7.0",
-                "symfony/finder": "^6.4|^7.0",
+                "symfony/config": "^5.4|^6.0|^7.0",
+                "symfony/console": "^5.4|^6.0|^7.0",
+                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
+                "symfony/finder": "^5.4|^6.0|^7.0",
                 "symfony/http-client-contracts": "^2.5|^3.0",
-                "symfony/http-kernel": "^6.4|^7.0",
-                "symfony/intl": "^6.4|^7.0",
+                "symfony/http-kernel": "^5.4|^6.0|^7.0",
+                "symfony/intl": "^5.4|^6.0|^7.0",
                 "symfony/polyfill-intl-icu": "^1.21",
-                "symfony/routing": "^6.4|^7.0",
+                "symfony/routing": "^5.4|^6.0|^7.0",
                 "symfony/service-contracts": "^2.5|^3",
-                "symfony/yaml": "^6.4|^7.0"
+                "symfony/yaml": "^5.4|^6.0|^7.0"
             },
             "type": "library",
             "autoload": {
@@ -5262,7 +5254,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v7.2.6"
+                "source": "https://github.com/symfony/translation/tree/v6.4.21"
             },
             "funding": [
                 {
@@ -5278,7 +5270,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-07T19:09:28+00:00"
+            "time": "2025-04-07T19:02:30+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -5785,6 +5777,267 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "winatabayu00/indicator",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/effortless-codes/indicators.git",
+                "reference": "dd547a003be9ef9ae29e5167e453c4739df9139c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/effortless-codes/indicators/zipball/dd547a003be9ef9ae29e5167e453c4739df9139c",
+                "reference": "dd547a003be9ef9ae29e5167e453c4739df9139c",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^2.66",
+                "php": ">=8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "indicator": "Winata\\Core\\Indicator\\Facades\\Indicator"
+                    },
+                    "providers": [
+                        "Winata\\Core\\Indicator\\BaseServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Winata\\Core\\Indicator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Winata bayu",
+                    "email": "winatabayu01@email.com"
+                }
+            ],
+            "description": "Indicator toast and alert for view",
+            "support": {
+                "issues": "https://github.com/effortless-codes/indicators/issues",
+                "source": "https://github.com/effortless-codes/indicators/tree/v1.0.1"
+            },
+            "time": "2023-11-16T06:33:07+00:00"
+        },
+        {
+            "name": "winatabayu00/laravel-menu-generator",
+            "version": "1.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/effortless-codes/menus.git",
+                "reference": "82c113e4b05f76b56c403e0e7ee9516a4c4233ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/effortless-codes/menus/zipball/82c113e4b05f76b56c403e0e7ee9516a4c4233ff",
+                "reference": "82c113e4b05f76b56c403e0e7ee9516a4c4233ff",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "ext-json": "*",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Winata\\Menu\\MenuServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Winata\\Menu\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Winata Bayu",
+                    "email": "winatabayu01@email.com"
+                }
+            ],
+            "description": "Laravel menu generator package for dynamic and groupable menus.",
+            "keywords": [
+                "dynamic-menu",
+                "generator",
+                "laravel",
+                "menu",
+                "menu-group"
+            ],
+            "support": {
+                "issues": "https://github.com/effortless-codes/menus/issues",
+                "source": "https://github.com/effortless-codes/menus/tree/v1.0.10"
+            },
+            "time": "2025-04-12T16:47:11+00:00"
+        },
+        {
+            "name": "winatabayu00/package-based",
+            "version": "1.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/effortless-codes/package-based.git",
+                "reference": "ad44ca2197424cdee2bd4fd0cf7e198c76b2580f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/effortless-codes/package-based/zipball/ad44ca2197424cdee2bd4fd0cf7e198c76b2580f",
+                "reference": "ad44ca2197424cdee2bd4fd0cf7e198c76b2580f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "ext-json": "*",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Winata\\PackageBased\\BaseServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Winata\\PackageBased\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Winata Bayu",
+                    "email": "winatabayu01@email.com"
+                }
+            ],
+            "description": "Laravel base package to help with modular and service-based project development.",
+            "support": {
+                "issues": "https://github.com/effortless-codes/package-based/issues",
+                "source": "https://github.com/effortless-codes/package-based/tree/v1.0.9"
+            },
+            "time": "2025-05-07T13:40:01+00:00"
+        },
+        {
+            "name": "winatabayu00/query-builder-custom",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/effortless-codes/query-builder-custom.git",
+                "reference": "559ee8e911a31ef4cb117d3b14fa30010e20f732"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/effortless-codes/query-builder-custom/zipball/559ee8e911a31ef4cb117d3b14fa30010e20f732",
+                "reference": "559ee8e911a31ef4cb117d3b14fa30010e20f732",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "ext-json": "*",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Winata\\QueryBuilder\\BaseServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Winata\\QueryBuilder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Winata Bayu",
+                    "email": "winatabayu01@email.com"
+                }
+            ],
+            "description": "A Laravel-compatible custom query builder extension.",
+            "support": {
+                "issues": "https://github.com/effortless-codes/query-builder-custom/issues",
+                "source": "https://github.com/effortless-codes/query-builder-custom/tree/v1.0.0"
+            },
+            "time": "2025-04-10T07:09:18+00:00"
+        },
+        {
+            "name": "winatabayu00/response",
+            "version": "1.0.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/effortless-codes/response.git",
+                "reference": "a37e44ad7485ad07cfd662a3f68c412f1c7632a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/effortless-codes/response/zipball/a37e44ad7485ad07cfd662a3f68c412f1c7632a0",
+                "reference": "a37e44ad7485ad07cfd662a3f68c412f1c7632a0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Winata\\Core\\Response\\BaseServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Winata\\Core\\Response\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Winata Bayu",
+                    "email": "winatabayu01@email.com"
+                }
+            ],
+            "description": "Standardized JSON Response Handler for Laravel",
+            "support": {
+                "issues": "https://github.com/effortless-codes/response/issues",
+                "source": "https://github.com/effortless-codes/response/tree/v1.0.14"
+            },
+            "time": "2025-04-12T13:12:40+00:00"
         }
     ],
     "packages-dev": [
@@ -8075,12 +8328,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
