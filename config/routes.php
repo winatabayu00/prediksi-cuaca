@@ -49,7 +49,7 @@ return [
             'prefix' => '',
         ],
         'admin' => [
-            'middleware' => ['web'/*, 'auth'*/],
+            'middleware' => ['web', 'auth'],
             'prefix' => 'admin',
             'as' => 'admin.',
         ],
