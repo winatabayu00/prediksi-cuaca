@@ -28,7 +28,7 @@ enum Predict: string
         };
     }
 
-    public function getPredict(int $amount)
+    public static function getPredict(int $amount)
     {
         if (($amount < self::LOW->predict())){
             return self::LOW;

@@ -11,6 +11,9 @@ namespace App\Models;
  * */
 class PrediksiCurahHujan extends Model
 {
+
+    protected $table = 'prediksi_curah_hujan';
+
     protected $fillable = [
         'year',
         'month',

@@ -10,6 +10,9 @@ namespace App\Models;
  * */
 class Cuaca extends Model
 {
+
+    protected $table = 'cuaca_histories';
+
     protected $fillable = [
         'year',
         'month',
