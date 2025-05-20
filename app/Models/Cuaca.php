@@ -18,4 +18,8 @@ class Cuaca extends Model
         'month',
         'curah_hujan',
     ];
+
+    protected $casts = [
+        'curah_hujan' => 'integer',
+    ];
 }
