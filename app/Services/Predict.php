@@ -23,30 +23,37 @@ class Predict extends BaseService
             return [$item->year, $item->month, $item->curah_hujan];
         })->toArray();
 
-        $testingValues = array_column($dataTesting, 'value'); // [33, 185, 66]
+        $testingValues = array_column($dataTesting, 'value'); // [33, 185, 66,]
 
         $trainingWindows = $this->generateWindows($dataTraining);
 
         $distances = [];
 
+        $count = 0;
         foreach ($trainingWindows as $window) {
+            $count++;
+            if ($count > 56){
+                continue;
+            }
+            $data = $window['distance'];
+            $nextTrainingWindow = ($count === 56) ? [33] : [$trainingWindows[$count]['distance'][2]];
+            $data = array_merge( $data, $nextTrainingWindow);
             $distances[] = [
                 'periode' => $window['periode'],
-                'window' => $window['distance'],
+                'window' => $data,
                 'distance' => $this->getEuclideanDistance($window['distance'], $testingValues)
             ];
         }
 
-        return collect($distances)->sortBy('distance');
-
+        return collect($distances)->where('distance', '>', 0)->sortBy('distance')->values()->all();
     }
 
-    public function getEuclideanDistance(array $a, array $b): float
+    public function getEuclideanDistance(array $dataTraining, array $dataTesting): float
     {
         $sum = 0;
-        if (count($a) === count($b)) {
-            for ($i = 0; $i < count($a); $i++) {
-                $sum += pow($a[$i] - $b[$i], 2);
+        if (count($dataTraining) === count($dataTesting)) {
+            for ($i = 0; $i < count($dataTraining); $i++) {
+                $sum += pow($dataTesting[$i] - $dataTraining[$i], 2);
             }
         }
         return sqrt($sum);

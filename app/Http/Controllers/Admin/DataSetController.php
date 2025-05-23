@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cuaca;
+use App\Models\PrediksiCurahHujan;
 use App\Services\Predict;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
@@ -78,7 +79,8 @@ class DataSetController extends Controller
             'curah_hujan' => 'required', 'numeric', 'gte:0',
         ]);
 
-        Cuaca::query()->create($validated);
+        $validated['date'] = now()->toDateString();
+        PrediksiCurahHujan::query()->create($validated);
         successToast();
         return redirect()->back();
     }

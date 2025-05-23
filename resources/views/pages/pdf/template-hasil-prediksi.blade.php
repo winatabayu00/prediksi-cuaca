@@ -30,40 +30,63 @@
     </style>
 </head>
 <body>
-    <h2>Jadwal Agenda</h2>
+<h2>Jadwal Agenda</h2>
 
-    <table>
-        <thead>
+<table>
+    <thead>
+    <tr>
+        <th>Tahun</th>
+        <th>Bulan</th>
+        <th>Agenda</th>
+    </tr>
+    </thead>
+    <tbody>
+    @php
+        $isMenanam = false;
+    @endphp
+    @foreach($result as $key => $data)
+        @php
+            $date = \Carbon\CarbonImmutable::createFromDate($data->year, $data->month, '01');
+            $curahHujan = \App\Enums\Predict::getPredict($data->curah_hujan)->value;
+            if ($key == 0 && in_array($curahHujan, [\App\Enums\Predict::LOW->value, \App\Enums\Predict::MEDIUM->value])){
+                $isMenanam = true;
+            }
+        @endphp
+
+        @continue($key > 0 && !$isMenanam)
+
+        @if(!$isMenanam)
             <tr>
-                <th width="100px">Tahun</th>
-                <th width="100px">Bulan</th>
-                <th width="100px">Agenda</th>
+                <td>{{ $date->format('Y') }}</td>
+                <td>{{ $date->format('F') }}</td>
+                <td>Tidak Ada Agenda Menanam Pada Bulan Ini</td>
             </tr>
-        </thead>
-        <tbody>
-        @if(isset($cuaca))
-            @for($i = 0; $i < 3; $i++)
-                @php
-                    $date = \Carbon\CarbonImmutable::createFromDate($cuaca->year, $cuaca->month, '01');
-                        $menanam = in_array(\App\Enums\Predict::getPredict($cuaca->curah_hujan)->value, ['medium', 'low']);
-                @endphp
-                @if($i < 2)
-                    <tr>
-                        <td>{{ $date->addMonth($i)->format('Y') }}</td>
-                        <td>{{ $date->addMonth($i)->format('F') }}</td>
-                        <td>{{ $menanam ? 'Menanam' : 'Tidak disarankan menanam di bulan ini' }}</td>
-                    </tr>
-                @else
-                    <tr>
-                        <td>{{ $date->addMonth($i)->format('Y') }}</td>
-                        <td>{{ $date->addMonth($i)->format('F') }}</td>
-                        <td>{{ $menanam ? 'Memanen' : 'Tidak ada agenda penanaman ' }}</td>
-                    </tr>
-                @endif
-            @endfor
         @endif
 
-        </tbody>
-    </table>
+
+        @if($isMenanam)
+            @if($key < 2)
+                <tr>
+                    <td>{{ $date->format('Y') }}</td>
+                    <td>{{ $date->format('F') }}</td>
+                    <td>@if(in_array($curahHujan, [\App\Enums\Predict::HIGH->value, \App\Enums\Predict::VERY_HIGH->value]))
+                            Hati
+                            Hati {{ \App\Enums\Predict::tryFrom($curahHujan)->information() }}
+                        @else
+                            {{ \App\Enums\Predict::tryFrom($curahHujan)->informationMessage() }}
+                        @endif </td>
+                </tr>
+            @else
+                <tr>
+                    <td>{{ $date->format('Y') }}</td>
+                    <td>{{ $date->format('F') }}</td>
+                    <td>Memanen</td>
+                </tr>
+            @endif
+        @endif
+
+    @endforeach
+    </tbody>
+</table>
 </body>
 </html>

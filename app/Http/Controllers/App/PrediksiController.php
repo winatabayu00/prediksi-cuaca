@@ -4,6 +4,7 @@ namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cuaca;
+use App\Models\PrediksiCurahHujan;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Dentro\Yalr\Attributes;
@@ -46,13 +47,10 @@ class PrediksiController extends Controller
         $this->setData('months', $months);
 
         $year = $request->input('year');
-        $month = $request->input('month');
-        if (!empty($year) && !empty($month)) {
+        if (!empty($year)) {
 
-            $cuaca = Cuaca::query()
-                ->where('year', $year)
-                ->where('month', '>=', $month)
-                ->limit(3);
+            $cuaca = PrediksiCurahHujan::query()
+                ->where('year', $year);
             $result = $cuaca->get();
 
             $this->setData('result', $result);

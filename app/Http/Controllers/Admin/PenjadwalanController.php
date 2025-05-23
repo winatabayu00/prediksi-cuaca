@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cuaca;
+use App\Models\PrediksiCurahHujan;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Dentro\Yalr\Attributes;
@@ -54,11 +54,10 @@ class PenjadwalanController extends Controller
         $year = $request->input('year');
         $month = $request->input('month');
         if (!empty($year) && !empty($month)) {
-            $cuaca = Cuaca::query()->where([
+            $cuaca = PrediksiCurahHujan::query()->where([
                 'year' => $year,
-                'month' => $month,
-            ])->first();
-            $this->setData('cuaca', $cuaca);
+            ])->where('month', '>', $month)->limit(3)->get();
+            $this->setData('result', $cuaca);
         }
 
         return $this->view('pages.admin.penjadwalan.index');

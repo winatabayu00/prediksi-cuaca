@@ -77,20 +77,20 @@
 
                                     @php
                                         $count = 0;
-                                        $curahHujan = 0
+                                        $curahHujan = 0;
                                     @endphp
-                                    @foreach($result as $item)
+                                    @foreach($result as $key => $item)
                                         @php
                                             $count++;
                                         @endphp
                                         @continue($count > 7)
                                         @php
-                                            $curahHujan += $item['window'][2];
+                                            $curahHujan += $item['window'][3];
                                         @endphp
                                         <tr>
                                             <td>( {{ implode(',', $item['periode']) }} )</td>
                                             <td>( {{ implode(',', $item['window']) }} )</td>
-                                            <td>{{ $item['window'][2] }}</td>
+                                            <td>{{ $item['window'][3] }}</td>
                                             <td>{{ $item['distance'] }}</td>
                                             <td>{{ \App\Enums\Predict::tryFrom(\App\Enums\Predict::getPredict($item['window'][2])->value)->label() }}</td>
                                         </tr>
@@ -101,8 +101,13 @@
                                         <td></td>
                                         <td></td>
                                         <td>Tingkat Curah Hujan: {{ (int)($curahHujan / 7) }}</td>
-                                        <td>Kesimpulan: {{ \App\Enums\Predict::tryFrom(\App\Enums\Predict::getPredict((int)($curahHujan / 7))->value)->label() }}</td>
-                                        <td><button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_1">Simpan</button></td>
+                                        <td>
+                                            Kesimpulan: {{ \App\Enums\Predict::tryFrom(\App\Enums\Predict::getPredict((int)($curahHujan / 7))->value)->label() }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#kt_modal_1">Simpan
+                                            </button>
+                                        </td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -122,6 +127,7 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr class="fw-bold fs-6 text-gray-800">
+                                        <th width="300px">No</th>
                                         <th width="300px">Periode</th>
                                         <th width="300px">data</th>
                                         <th width="200px">Curah Hujan</th>
@@ -131,11 +137,19 @@
                                     </thead>
                                     <tbody>
 
+                                    @php
+                                        $count = 0;
+                                    @endphp
                                     @foreach($result as $item)
+                                        @php
+                                        $count++;
+                                        @endphp
+{{--                                        @continue(!isset($result[$count]))--}}
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>( {{ implode(',', $item['periode']) }} )</td>
                                             <td>( {{ implode(',', $item['window']) }} )</td>
-                                            <td>{{ $item['window'][2] }}</td>
+                                            <td>{{ $item['window'][3]  }}</td>
                                             <td>{{ $item['distance'] }}</td>
                                             <td>{{ \App\Enums\Predict::tryFrom(\App\Enums\Predict::getPredict($item['window'][2])->value)->label() }}</td>
                                         </tr>
@@ -160,7 +174,8 @@
                     <h3 class="modal-title">Simpan Hasil Prediksi</h3>
 
                     <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                         aria-label="Close">
                         <i class="fa-solid fa-circle-xmark fs-2"></i>
                     </div>
                     <!--end::Close-->

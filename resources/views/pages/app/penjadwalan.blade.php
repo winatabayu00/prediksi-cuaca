@@ -49,45 +49,73 @@
         </div>
     </div>
 
-    @if(isset($cuaca))
+    @if(isset($result))
         <div class="card mb-10">
             <div class="card-header">
                 <h3 class="card-title"> Jadwal </h3>
                 <div class="card-toolbar">
-                    <a class="btn btn-info" href="{{ route('penjadwalan.pdf', ['year' => request()->input('year'), 'month' => request()->input('month')]) }}" target="_blank">PDF</a>
+                    <a class="btn btn-info"
+                       href="{{ route('penjadwalan.pdf', ['year' => request()->input('year'), 'month' => request()->input('month')]) }}"
+                       target="_blank">PDF</a>
                 </div>
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-center">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table ">
                             <thead>
                             <tr class="fw-bold fs-6 text-gray-800">
                                 <th width="100px">Tahun</th>
                                 <th width="100px">Bulan</th>
-                                <th width="100px">Agenda</th>
+                                <th width="400px">Agenda</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @for($i = 0; $i < 3; $i++)
+                            @php
+                                $isMenanam = false;
+                            @endphp
+                            @foreach($result as $key => $data)
                                 @php
-                                    $date = \Carbon\CarbonImmutable::createFromDate($cuaca->year, $cuaca->month, '01');
-                                        $menanam = in_array(\App\Enums\Predict::getPredict($cuaca->curah_hujan)->value, ['medium', 'low']);
+                                    $date = \Carbon\CarbonImmutable::createFromDate($data->year, $data->month, '01');
+                                    $curahHujan = \App\Enums\Predict::getPredict($data->curah_hujan)->value;
+                                    if ($key == 0 && in_array($curahHujan, [\App\Enums\Predict::LOW->value, \App\Enums\Predict::MEDIUM->value])){
+                                        $isMenanam = true;
+                                    }
                                 @endphp
-                                @if($i < 2)
+
+                                @continue($key > 0 && !$isMenanam)
+
+                                @if(!$isMenanam)
                                     <tr>
-                                        <td>{{ $date->addMonth($i)->format('Y') }}</td>
-                                        <td>{{ $date->addMonth($i)->format('F') }}</td>
-                                        <td>{{ $menanam ? 'Menanam' : 'Tidak disarankan menanam di bulan ini' }}</td>
-                                    </tr>
-                                @else
-                                    <tr>
-                                        <td>{{ $date->addMonth($i)->format('Y') }}</td>
-                                        <td>{{ $date->addMonth($i)->format('F') }}</td>
-                                        <td>{{ $menanam ? 'Memanen' : 'Tidak ada agenda penanaman ' }}</td>
+                                        <td>{{ $date->format('Y') }}</td>
+                                        <td>{{ $date->format('F') }}</td>
+                                        <td>Tidak Ada Agenda Menanam Pada Bulan Ini</td>
                                     </tr>
                                 @endif
-                            @endfor
+
+
+                                @if($isMenanam)
+                                    @if($key < 2)
+                                        <tr>
+                                            <td>{{ $date->format('Y') }}</td>
+                                            <td>{{ $date->format('F') }}</td>
+                                            <td>@if(in_array($curahHujan, [\App\Enums\Predict::HIGH->value, \App\Enums\Predict::VERY_HIGH->value]))
+                                                    Hati
+                                                    Hati {{ \App\Enums\Predict::tryFrom($curahHujan)->information() }}
+                                                @else
+                                                    {{ \App\Enums\Predict::tryFrom($curahHujan)->informationMessage() }}
+                                                @endif </td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td>{{ $date->format('Y') }}</td>
+                                            <td>{{ $date->format('F') }}</td>
+                                            <td>Memanen</td>
+                                        </tr>
+                                    @endif
+                                @endif
+
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cuaca;
+use App\Models\PrediksiCurahHujan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
@@ -49,11 +50,10 @@ class PenjadwalanController extends Controller
         $year = $request->input('year');
         $month = $request->input('month');
         if (!empty($year) && !empty($month)) {
-            $cuaca = Cuaca::query()->where([
+            $cuaca = PrediksiCurahHujan::query()->where([
                 'year' => $year,
-                'month' => $month,
-            ])->first();
-            $this->setData('cuaca', $cuaca);
+            ])->where('month', '>=', $month)->limit(3)->get();
+            $this->setData('result', $cuaca);
         }
 
         return $this->view('pages.app.penjadwalan');
@@ -61,18 +61,17 @@ class PenjadwalanController extends Controller
 
 
     #[Attributes\Get('penjadwalan/pdf', 'penjadwalan.pdf')]
-    public function pdf()
+    public function pdf(Request $request)
     {
-        $year = request()->input('year');
-        $month = request()->input('month');
+        $year = $request->input('year');
+        $month = $request->input('month');
         $cuaca = null;
         if (!empty($year) && !empty($month)) {
-            $cuaca = Cuaca::query()->where([
+            $cuaca = PrediksiCurahHujan::query()->where([
                 'year' => $year,
-                'month' => $month,
-            ])->first();
+            ])->where('month', '>=', $month)->limit(3)->get();
         }
-        $pdf = Pdf::loadView('pages.pdf.template-hasil-prediksi', ['cuaca' => $cuaca]);
+        $pdf = Pdf::loadView('pages.pdf.template-hasil-prediksi', ['result' => $cuaca]);
         return $pdf->stream('jadwal-agenda.pdf');
     }
 }

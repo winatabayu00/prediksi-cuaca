@@ -20,4 +20,8 @@ class PrediksiCurahHujan extends Model
         'curah_hujan',
         'date',
     ];
+
+    protected $casts = [
+        'curah_hujan' => 'integer',
+    ];
 }
