@@ -31,12 +31,13 @@ class Predict extends BaseService
 
         foreach ($trainingWindows as $window) {
             $distances[] = [
-                'window' => $window,
-                'distance' => $this->getEuclideanDistance($window, $testingValues)
+                'periode' => $window['periode'],
+                'window' => $window['distance'],
+                'distance' => $this->getEuclideanDistance($window['distance'], $testingValues)
             ];
         }
 
-        return $distances;
+        return collect($distances)->sortBy('distance');
 
     }
 
@@ -53,11 +54,15 @@ class Predict extends BaseService
 
     public function generateWindows(array $rawData, int $windowSize = 3): array
     {
+        $period = array_map(fn($item) => "{$item[0]}/$item[1]", $rawData);
         $values = array_map(fn($item) => $item[2], $rawData);
         $windows = [];
 
         for ($i = 0; $i <= count($values) - $windowSize; $i++) {
-            $windows[] = array_slice($values, $i, $windowSize);
+            $windows[] = [
+                'distance' => array_slice($values, $i, $windowSize),
+                'periode' => array_slice($period, $i, $windowSize),
+            ];
         }
 
         return $windows;

@@ -24,6 +24,16 @@
                 </a>
             </div>
 
+            <!-- Dataset -->
+            <div class="menu-item menu-accordion">
+                <a href="{{ route('admin.dataset.index') }}" class="menu-link {{ Route::is('admin.dataset.index') ? 'active' : '' }}">
+                    <span class="menu-icon">
+                        <i class="fa-solid fa-brain fs-2"></i>
+                    </span>
+                    <span class="menu-title">Dataset</span>
+                </a>
+            </div>
+
             <!-- Prediksi -->
             <div class="menu-item menu-accordion">
                 <a href="{{ route('admin.prediksi.index') }}" class="menu-link {{ Route::is('admin.prediksi.index') ? 'active' : '' }}">

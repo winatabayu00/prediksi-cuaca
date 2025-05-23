@@ -80,6 +80,7 @@ return [
         App\Http\Controllers\Admin\DashboardController::class,
         App\Http\Controllers\Admin\PrediksiController::class,
         App\Http\Controllers\Admin\PenjadwalanController::class,
+        App\Http\Controllers\Admin\DataSetController::class,
     ],
     'api' => [
         //

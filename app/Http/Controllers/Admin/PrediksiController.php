@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cuaca;
 use App\Services\Predict;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
@@ -28,18 +29,34 @@ class PrediksiController extends Controller
     #[Attributes\Get('', 'index')]
     public function index(Request $request): View
     {
+        $years = [];
+        $date = CarbonImmutable::createFromDate('2019', '01', '01');
+        $dateNow = Carbon::now();
+        for ($i = 0; $i < $date->diffInYears($dateNow) + 1; $i++) {
+            $year = $date->addYear($i);
+            $years[] = [
+                'id' => $year->format('Y'),
+                'name' => $year->format('Y'),
+            ];
+        }
+
+        $months = [];
+        $date = CarbonImmutable::now()->startOfYear();
+        for ($i = 0; $i < 12; $i++) {
+            $month = $date->addMonth($i);
+            $months[] = [
+                'id' => $month->format('m'),
+                'name' => $month->format('F'),
+            ];
+        }
+
+        $this->setData('years', $years);
+        $this->setData('months', $months);
 
         if (!empty($request->input('data'))) {
             $prediksi = new Predict();
             $data = $prediksi->predict($request->input('data'));
 
-            $total = 0;
-            foreach ($data as $item){
-                $total += $item['window'][2];
-            }
-            $output = round($total / count($data));
-
-            $this->setData('output', $output);
             $this->setData('result', $data);
         }
         return $this->view('pages.admin.prediksi.index');

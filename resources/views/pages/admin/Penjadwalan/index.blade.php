@@ -21,9 +21,7 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
 
-                <div class="card-body border-top p-2">
                     <div class="row mb-6">
                         <label class="col-lg-4 col-form-label required fw-semibold fs-6">BULAN</label>
 
