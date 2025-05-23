@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cuaca;
 use Dentro\Yalr\Attributes;
 use Illuminate\Contracts\View\View;
 
@@ -23,6 +24,17 @@ class DashboardController extends Controller
     #[Attributes\Get('', 'index')]
     public function index(): View
     {
+        $cuaca = Cuaca::query()
+            ->get();
+
+        $chartData = [
+            'categories' => $cuaca->map(function ($cuaca) {
+                return "{$cuaca->year}/{$cuaca->month}";
+            }),
+            'series' => $cuaca->map(fn($val) => $val->curah_hujan)
+        ];
+
+        $this->setData('chartData', $chartData);
         return $this->view('pages.admin.dashboard.index');
     }
 }

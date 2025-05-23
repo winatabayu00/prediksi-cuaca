@@ -11,6 +11,9 @@
 @push('js')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const chartCategories = @json($chartData['categories']);
+            const chartSeries = @json($chartData['series']);
+
             var element = document.getElementById('kt_apexcharts_3');
 
             if (!element || typeof KTUtil === 'undefined') {
@@ -26,8 +29,8 @@
 
             var options = {
                 series: [{
-                    name: 'Net Profit',
-                    data: [30, 40, 40, 90, 90, 70, 70]
+                    name: 'Curah Hujan',
+                    data: chartSeries
                 }],
                 chart: {
                     fontFamily: 'inherit',
@@ -50,7 +53,7 @@
                     colors: [baseColor]
                 },
                 xaxis: {
-                    categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                    categories: chartCategories,
                     axisBorder: { show: false },
                     axisTicks: { show: false },
                     labels: {
@@ -81,7 +84,7 @@
                     style: { fontSize: '12px' },
                     y: {
                         formatter: function (val) {
-                            return '$' + val + ' thousands';
+                            return val ;
                         }
                     }
                 },
