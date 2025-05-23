@@ -16,6 +16,11 @@ use Illuminate\Http\Request;
 #[Attributes\Name('', false, false)]
 class PenjadwalanController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setPageTitle('Penjadwalan Penanaman');
+    }
     /**
      * @param Request $request
      * @return View
