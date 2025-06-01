@@ -84,7 +84,7 @@
 			</span>
     </div>
 
-    @include('layouts.blocks-landing.footer')
+{{--    @include('layouts.blocks-landing.footer')--}}
 </div>
 
 @include('vendor.indicator.init-indicator')
