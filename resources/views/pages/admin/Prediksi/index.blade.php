@@ -100,7 +100,7 @@
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                        <td>Tingkat Curah Hujan: {{ (int)($curahHujan / 7) }}</td>
+                                        <td>Tingkat Curah Hujan: {{ round(($curahHujan / 7), 0) }}</td>
                                         <td>
                                             Kesimpulan: {{ \App\Enums\Predict::tryFrom(\App\Enums\Predict::getPredict((int)($curahHujan / 7))->value)->label() }}</td>
                                         <td>
