@@ -67,7 +67,7 @@
                                     <thead>
                                     <tr class="fw-bold fs-6 text-gray-800">
                                         <th width="300px">Periode</th>
-                                        <th width="300px">data</th>
+{{--                                        <th width="300px">data</th>--}}
                                         <th width="200px">Curah Hujan</th>
                                         <th width="200px">Jarak</th>
                                         <th width="100px">Keterangan</th>
@@ -89,7 +89,7 @@
                                         @endphp
                                         <tr>
                                             <td>( {{ implode(',', $item['periode']) }} )</td>
-                                            <td>( {{ implode(',', $item['window']) }} )</td>
+{{--                                            <td>( {{ implode(',', $item['window']) }} )</td>--}}
                                             <td>{{ $item['window'][3] }}</td>
                                             <td>{{ $item['distance'] }}</td>
                                             <td>{{ \App\Enums\Predict::tryFrom(\App\Enums\Predict::getPredict($item['window'][2])->value)->label() }}</td>
@@ -129,7 +129,7 @@
                                     <tr class="fw-bold fs-6 text-gray-800">
                                         <th width="300px">No</th>
                                         <th width="300px">Periode</th>
-                                        <th width="300px">data</th>
+{{--                                        <th width="300px">data</th>--}}
                                         <th width="200px">Curah Hujan</th>
                                         <th width="200px">Jarak</th>
                                         <th width="100px">Keterangan</th>
@@ -148,7 +148,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>( {{ implode(',', $item['periode']) }} )</td>
-                                            <td>( {{ implode(',', $item['window']) }} )</td>
+{{--                                            <td>( {{ implode(',', $item['window']) }} )</td>--}}
                                             <td>{{ $item['window'][3]  }}</td>
                                             <td>{{ $item['distance'] }}</td>
                                             <td>{{ \App\Enums\Predict::tryFrom(\App\Enums\Predict::getPredict($item['window'][2])->value)->label() }}</td>
