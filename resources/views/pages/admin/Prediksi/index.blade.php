@@ -15,7 +15,7 @@
 
                     <div class="d-flex row">
                         <div class="col-6">
-                            <label>Dalam Periode</label>
+                            <label>Dalam Periode <em>(bulan/tahun)</em></label>
                             <input
                                 class="form-control"
                                 type="text"
