@@ -55,19 +55,15 @@ class PrediksiController extends Controller
         $this->setData('years', $years);
         $this->setData('months', $months);
 
-        if ($request->filled('data')) {
+        if (!empty($request->input('data'))) {
             $prediksi = new Predict();
 
-            $validatedData = $request->validate([
-                'data.year' => 'required|integer|between:' . $START_YEAR . ',' . $dateNow->year,
-                'data.month' => 'required|integer|between:1,12',
-            ]);
-
+            $input = $request->input('data');
             try {
-                $data = $prediksi->predict($validatedData['data']);
+                $data = $prediksi->predict($input);
                 $this->setData('result', $data);
 
-                $prediksiUntukBulan = Carbon::createFromDate($validatedData['data']['year'], $validatedData['data']['month'], 1);
+                $prediksiUntukBulan = Carbon::createFromDate($input[2]['year'], $input[2]['month'], 1);
                 $this->setData('predict_for', $prediksiUntukBulan->addMonth()->toDateString());
             } catch (\Exception $e) {
                 $this->setData('error', 'Terjadi kesalahan saat memproses prediksi.');
