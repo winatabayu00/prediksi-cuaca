@@ -91,6 +91,7 @@
     <i class="ki-duotone ki-arrow-up"><span class="path1"></span><span class="path2"></span></i>
 </div>
 
+@include('vendor.indicator.init-indicator')
 
 @include('includes.scripts')
 </body>

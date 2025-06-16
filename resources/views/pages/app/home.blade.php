@@ -490,12 +490,15 @@
                     <div class="weather-preview fade-in">
                         <h3>
                             <i class="fas fa-seedling"></i>
-                            Ayo cek waktu penanaman melon
+                            Siap Menentukan Waktu Tanam Melon?
                         </h3>
                         <div class="weather-status">
-                            ✅ WAKTU IDEAL UNTUK MENANAM
+                            Mulai gunakan {{ env('APP_NAME') }} sekarang dan dapatkan rekomendasi waktu tanam yang tepat
                         </div>
-                        <p>Kondisi cuaca mendukung untuk penanaman melon</p>
+                        <a href="{{ route('penjadwalan') }}" class="btn btn-secondary">
+                            <i class="fas fa-rocket"></i>
+                            Mulai Sekarang
+                        </a>
 
                     </div>
                 </div>
@@ -553,17 +556,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Siap Menentukan Waktu Tanam Melon?</h2>
-            <p>Mulai gunakan {{ env('APP_NAME') }} sekarang dan dapatkan rekomendasi waktu tanam yang tepat</p>
-            <a href="{{ route('penjadwalan') }}" class="btn btn-secondary">
-                <i class="fas fa-rocket"></i>
-                Mulai Sekarang
-            </a>
-        </div>
-    </section>
 @endsection
 
 @push('js')

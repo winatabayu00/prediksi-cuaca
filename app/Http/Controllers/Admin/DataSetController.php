@@ -82,6 +82,6 @@ class DataSetController extends Controller
         $validated['date'] = now()->toDateString();
         PrediksiCurahHujan::query()->create($validated);
         successToast();
-        return redirect()->back();
+        return redirect()->route('admin.prediksi.index');
     }
 }

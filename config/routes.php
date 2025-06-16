@@ -75,6 +75,8 @@ return [
         App\Http\Controllers\App\HomeController::class,
         App\Http\Controllers\App\PrediksiController::class,
         App\Http\Controllers\App\PenjadwalanController::class,
+        App\Http\Controllers\Authentication\ResetPasswordController::class,
+        App\Http\Controllers\Authentication\ForgotPasswordController::class
     ],
     'admin' => [
         App\Http\Controllers\Admin\DashboardController::class,

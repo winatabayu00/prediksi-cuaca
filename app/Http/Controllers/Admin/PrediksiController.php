@@ -29,10 +29,12 @@ class PrediksiController extends Controller
     #[Attributes\Get('', 'index')]
     public function index(Request $request): View
     {
+        $START_YEAR = 2019;
+
         $years = [];
-        $date = CarbonImmutable::createFromDate('2019', '01', '01');
+        $date = CarbonImmutable::createFromDate($START_YEAR, '01', '01');
         $dateNow = Carbon::now();
-        for ($i = 0; $i < $date->diffInYears($dateNow) + 1; $i++) {
+        for ($i = 0; $i <= $date->diffInYears($dateNow); $i++) {
             $year = $date->addYear($i);
             $years[] = [
                 'id' => $year->format('Y'),
@@ -53,12 +55,26 @@ class PrediksiController extends Controller
         $this->setData('years', $years);
         $this->setData('months', $months);
 
-        if (!empty($request->input('data'))) {
+        if ($request->filled('data')) {
             $prediksi = new Predict();
-            $data = $prediksi->predict($request->input('data'));
 
-            $this->setData('result', $data);
+            $validatedData = $request->validate([
+                'data.year' => 'required|integer|between:' . $START_YEAR . ',' . $dateNow->year,
+                'data.month' => 'required|integer|between:1,12',
+            ]);
+
+            try {
+                $data = $prediksi->predict($validatedData['data']);
+                $this->setData('result', $data);
+
+                $prediksiUntukBulan = Carbon::createFromDate($validatedData['data']['year'], $validatedData['data']['month'], 1);
+                $this->setData('predict_for', $prediksiUntukBulan->addMonth()->toDateString());
+            } catch (\Exception $e) {
+                $this->setData('error', 'Terjadi kesalahan saat memproses prediksi.');
+            }
         }
+
         return $this->view('pages.admin.prediksi.index');
     }
+
 }

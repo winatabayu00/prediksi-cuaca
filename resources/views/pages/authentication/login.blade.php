@@ -40,8 +40,8 @@
                             <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
                                 <div></div>
 
-                                <a href="#" class="link-primary">
-                                    {{--Forgot Password ?--}}
+                                <a href="{{ route('auth.forgot-password.form') }}" class="link-primary">
+                                    Lupa Kata Sandi ?
                                 </a>
                             </div>
 

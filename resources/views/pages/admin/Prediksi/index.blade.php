@@ -14,15 +14,24 @@
                     @endphp
 
                     <div class="d-flex row">
-                        <div class="col-6">
+                        <div class="col-6 row">
                             <label>Dalam Periode <em>(bulan/tahun)</em></label>
-                            <input
-                                class="form-control"
-                                type="text"
-                                name="data[{{ $i }}][period]"
-                                value="{{ $data['period'] }}"
-                                required
-                            >
+                            <div class="col-6">
+                               <select class="form-select" name="data[{{ $i }}][year]" data-control="select2" data-placeholder="Pilih Tahun" data-allow-clear="true">
+                                   <option></option>
+                                   @foreach($years as $year)
+                                       <option value="{{ $year['id'] }}" @selected($year['id'] === request()->input("data.{$i}.year"))>{{ $year['name'] }}</option>
+                                   @endforeach
+                               </select>
+                           </div>
+                           <div class="col-6">
+                               <select class="form-select" name="data[{{ $i }}][month]" data-control="select2" data-placeholder="Pilih Bulan" data-allow-clear="true">
+                                   <option></option>
+                                   @foreach($months as $month)
+                                       <option value="{{ $month['id'] }}" @selected($month['id'] === request()->input("data.{$i}.month"))>{{ $month['name'] }}</option>
+                                   @endforeach
+                               </select>
+                           </div>
                         </div>
                         <div class="col-6">
                             <label>Tingkat Curah Hujan</label>
@@ -32,6 +41,7 @@
                                 name="data[{{ $i }}][value]"
                                 value="{{ $data['value'] }}"
                                 step="0.01"
+                                placeholder="Input Curah Hujan"
                                 required
                             >
                         </div>
@@ -53,7 +63,7 @@
     @if(isset($result))
         <div class="card mb-10">
             <div class="card-header">
-                <h3 class="card-title"> Hasil Prediksi </h3>
+                <h3 class="card-title"> Hasil Prediksi Untuk Bulan {{ \Carbon\Carbon::parse($predict_for)->format('F Y') }}</h3>
             </div>
             <div class="card-body">
                 <div class="card mb-10">
@@ -104,9 +114,15 @@
                                         <td>
                                             Kesimpulan: {{ \App\Enums\Predict::tryFrom(\App\Enums\Predict::getPredict((int)($curahHujan / 7))->value)->label() }}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#kt_modal_1">Simpan
-                                            </button>
+                                            <form action="{{ route('admin.dataset.store') }}" method="post">
+                                                @csrf
+                                                <input hidden="hidden" name="curah_hujan" type="number" value="{{ round(($curahHujan / 7), 0) }}">
+                                                <input hidden="hidden" name="year" type="text" value="{{ \Carbon\Carbon::parse($predict_for)->format('Y') }}">
+                                                <input hidden="hidden" name="month" type="text" value="{{ \Carbon\Carbon::parse($predict_for)->format('m') }}">
+                                                <button class="btn btn-sm btn-primary" type="submit">Simpan
+                                                </button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                     </tfoot>
